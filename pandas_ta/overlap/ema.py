@@ -23,8 +23,8 @@ def ema(close, length=None, talib=None, offset=None, **kwargs):
     else:
         if sma:
             close = close.copy()
-            sma_nth = close[0:length].mean()
-            close[:length - 1] = npNaN
+            sma_nth = close.loc[0:length].mean()
+            close.loc[:length - 1] = npNaN
             close.iloc[length - 1] = sma_nth
         ema = close.ewm(span=length, adjust=adjust).mean()
 
